@@ -19,8 +19,9 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
 ))
 
 # Load the pre-trained model
-model = joblib.load('playlist_recommender_model.joblib')
-
+# Construct the file path using os.path.join
+model_path = os.path.join(os.path.dirname(__file__), 'playlist_recommender_model.joblib')
+model = joblib.load(model_path)
 
 # Function to get user tracks
 def get_user_tracks(sp, limit=20):
