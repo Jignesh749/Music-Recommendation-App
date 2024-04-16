@@ -5,6 +5,8 @@ from spotipy.exceptions import SpotifyException
 import joblib
 import logging
 
+print("Current working directory:", os.getcwd())
+
 # Define the scope of access
 scope = "user-library-read playlist-modify-public user-top-read playlist-modify-private"
 
