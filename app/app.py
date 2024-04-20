@@ -20,7 +20,6 @@ try:
     redirect_uri="http://localhost:8501/",
     scope=scope,
     ))
-    )
     st.write("Authentication successful!")
 except Exception as e:
     st.error(f"Failed to authenticate with Spotify: {e}")
