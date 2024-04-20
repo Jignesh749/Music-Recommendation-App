@@ -14,10 +14,9 @@ st.set_page_config(page_title="Spotify AI", page_icon="🎵")
 # Authenticate with Spotify
 try:
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
-        client_id="YOUR_CLIENT_ID",
-        client_secret="YOUR_CLIENT_SECRET",
-        redirect_uri="http://localhost:8501/",
-        scope=scope,
+         client_id="716c1e25d0b94ad59424c2fe6e5268ec",
+    client_secret="1f967480693941c69c6265ca6d920b4f",
+    redirect_uri="http://localhost:8000/callback",
     ))
 except Exception as e:
     st.error(f"Failed to authenticate with Spotify: {e}")
