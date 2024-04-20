@@ -13,18 +13,24 @@ st.set_page_config(page_title="Spotify AI", page_icon="🎵")
 
 # Authenticate with Spotify
 try:
+    st.write("Authenticating with Spotify...")
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     client_id="716c1e25d0b94ad59424c2fe6e5268ec",
     client_secret="1f967480693941c69c6265ca6d920b4f",
-    redirect_uri="http://localhost:8000/callback",
+    redirect_uri="http://localhost:8501/",
+    scope=scope,
     ))
+    )
+    st.write("Authentication successful!")
 except Exception as e:
     st.error(f"Failed to authenticate with Spotify: {e}")
     st.stop()
 
 # Load the pre-trained model
 try:
+    st.write("Loading the model...")
     model = joblib.load('playlist_recommender_model.joblib')
+    st.write("Model loaded successfully!")
 except Exception as e:
     st.error(f"Failed to load the model: {e}")
     st.stop()
@@ -34,7 +40,9 @@ st.title("Spotify AI 🎵")
 
 # Retrieve user ID and provide a message if the user is not logged in
 try:
+    st.write("Retrieving user ID...")
     user_id = sp.current_user()['id']
+    st.write(f"User ID: {user_id}")
 except spotipy.exceptions.SpotifyException as e:
     st.warning("Please authenticate with Spotify to continue.")
     st.stop()
@@ -43,11 +51,12 @@ except spotipy.exceptions.SpotifyException as e:
 def recommend_and_create_playlist():
     try:
         with st.spinner("Fetching tracks and recommendations..."):
-            # Retrieve user's tracks and top tracks
+            st.write("Fetching user tracks...")
             user_tracks = get_user_tracks(sp, limit=20)
+            st.write("Fetching user top tracks...")
             top_tracks = get_user_top_tracks(sp, time_range='medium_term', limit=20)
 
-            # Create an interaction matrix
+            st.write("Creating interaction matrix...")
             interaction_matrix = create_interaction_matrix(user_tracks, top_tracks)
 
             # Provide an input widget for the user to choose the number of recommendations
