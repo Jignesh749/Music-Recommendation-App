@@ -9,16 +9,16 @@ from playlist import get_user_tracks, get_user_top_tracks, create_interaction_ma
 scope = "user-library-read playlist-modify-public user-top-read playlist-modify-private"
 
 # Set up page configuration
-st.set_page_config(page_title="Spotify AI", page_icon="🎵")
+st.set_page_config(page_title="Spotify AI", page_icon="")
 
 # Authenticate with Spotify
 try:
     st.write("Authenticating with Spotify...")
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
-    client_id="716c1e25d0b94ad59424c2fe6e5268ec",
-    client_secret="1f967480693941c69c6265ca6d920b4f",
-    redirect_uri="http://localhost:8501/",
-    scope=scope,
+        client_id="716c1e25d0b94ad59424c2fe6e5268ec",
+        client_secret="1f967480693941c69c6265ca6d920b4f",
+        redirect_uri="http://localhost:8501/",
+        scope=scope,
     ))
     st.write("Authentication successful!")
 except Exception as e:
@@ -35,7 +35,7 @@ except Exception as e:
     st.stop()
 
 # Set up the Streamlit application
-st.title("Spotify AI 🎵")
+st.title("Spotify AI")
 
 # Retrieve user ID and provide a message if the user is not logged in
 try:
@@ -101,5 +101,5 @@ def recommend_and_create_playlist():
         st.error(f"An error occurred: {e}")
 
 # Add a button to run the recommendation and playlist creation
-if st.button("Recommend and Create Playlist 🎵"):
+if st.button("Recommend and Create Playlist"):
     recommend_and_create_playlist()
